@@ -1,5 +1,8 @@
 server:
   port: 9090
+  error:
+    include-message: always
+    include-binding-errors: always
 spring:
   jpa:
     show-sql: true
@@ -15,7 +18,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/RV
+          issuer-uri: http://localhost:8080/realms/recipevault
 app:
   name: recipevault
   keycloak:
