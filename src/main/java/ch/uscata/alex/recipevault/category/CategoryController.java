@@ -24,7 +24,7 @@ import ch.uscata.alex.recipevault.category.dto.CategoryResponseDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/api/categories")
 @RequiredArgsConstructor
 @Tag(name = "Category", description = "Verwaltung von Rezept-Kategorien")
 public class CategoryController {

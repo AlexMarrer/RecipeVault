@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ch.uscata.alex.recipevault.rating.dto.RatingRequestDTO;
@@ -26,44 +28,31 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/ratings")
 @RequiredArgsConstructor
 @Tag(name = "Rating", description = "Bewertungen von Rezepten (Sterne + Kommentar)")
 public class RatingController {
 
     private final RatingService ratingService;
 
-    @PostMapping("/api/recipe/{recipeId}/rating")
-    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping
     @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
-    @Operation(summary = "Bewertung zu einem Rezept anlegen",
-            description = "Ein Benutzer kann pro Rezept nur eine Bewertung abgeben.")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Bewertung angelegt"),
-            @ApiResponse(responseCode = "400", description = "Ungueltige Eingabe (Stars 1-5)"),
-            @ApiResponse(responseCode = "404", description = "Rezept nicht gefunden"),
-            @ApiResponse(responseCode = "409", description = "Benutzer hat dieses Rezept bereits bewertet")
-    })
-    public RatingResponseDTO create(
-            @Parameter(description = "Rezept-ID") @PathVariable Long recipeId,
-            @Valid @RequestBody RatingRequestDTO dto,
-            @AuthenticationPrincipal Jwt jwt) {
-        UUID userId = UUID.fromString(jwt.getSubject());
-        return ratingService.create(recipeId, dto, userId);
-    }
-
-    @GetMapping("/api/recipe/{recipeId}/rating")
-    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
-    @Operation(summary = "Alle Bewertungen eines Rezepts auflisten")
+    @Operation(summary = "Bewertungen auflisten",
+            description = "Liefert alle Bewertungen. Optional gefiltert nach Rezept.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Liste der Bewertungen"),
-            @ApiResponse(responseCode = "404", description = "Rezept nicht gefunden")
+            @ApiResponse(responseCode = "404", description = "Rezept nicht gefunden (bei Filter)")
     })
-    public List<RatingResponseDTO> listForRecipe(
-            @Parameter(description = "Rezept-ID") @PathVariable Long recipeId) {
-        return ratingService.findByRecipe(recipeId);
+    public List<RatingResponseDTO> list(
+            @Parameter(description = "Optional: Filter nach Rezept-ID")
+            @RequestParam(required = false) Long recipeId) {
+        if (recipeId != null) {
+            return ratingService.findByRecipe(recipeId);
+        }
+        return ratingService.findAll();
     }
 
-    @GetMapping("/api/rating/me")
+    @GetMapping("/me")
     @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Eigene Bewertungen des angemeldeten Benutzers")
     public List<RatingResponseDTO> myRatings(@AuthenticationPrincipal Jwt jwt) {
@@ -71,7 +60,7 @@ public class RatingController {
         return ratingService.findByUser(userId);
     }
 
-    @GetMapping("/api/rating/{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Bewertung per ID abrufen")
     @ApiResponses({
@@ -83,7 +72,25 @@ public class RatingController {
         return ratingService.findById(id);
     }
 
-    @PutMapping("/api/rating/{id}")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
+    @Operation(summary = "Bewertung anlegen",
+            description = "Ein Benutzer kann pro Rezept nur eine Bewertung abgeben.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Bewertung angelegt"),
+            @ApiResponse(responseCode = "400", description = "Ungueltige Eingabe (Stars 1-5)"),
+            @ApiResponse(responseCode = "404", description = "Rezept nicht gefunden"),
+            @ApiResponse(responseCode = "409", description = "Benutzer hat dieses Rezept bereits bewertet")
+    })
+    public RatingResponseDTO create(
+            @Valid @RequestBody RatingRequestDTO dto,
+            @AuthenticationPrincipal Jwt jwt) {
+        UUID userId = UUID.fromString(jwt.getSubject());
+        return ratingService.create(dto, userId);
+    }
+
+    @PutMapping("/{id}")
     @PreAuthorize("hasRole('admin') or @ratingService.isOwner(#id, authentication)")
     @Operation(summary = "Bewertung aktualisieren",
             description = "Admin darf alles. Benutzer nur eigene Bewertungen.")
@@ -98,7 +105,7 @@ public class RatingController {
         return ratingService.update(id, dto);
     }
 
-    @DeleteMapping("/api/rating/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('admin') or @ratingService.isOwner(#id, authentication)")
     @Operation(summary = "Bewertung loeschen")

@@ -24,7 +24,7 @@ import ch.uscata.alex.recipevault.ingredient.dto.IngredientResponseDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ingredient")
+@RequestMapping("/api/ingredients")
 @RequiredArgsConstructor
 @Tag(name = "Ingredient", description = "Verwaltung von Zutaten")
 public class IngredientController {

@@ -54,7 +54,7 @@ class CategoryControllerTest {
 
     @Test
     void list_unauthenticated_returns401() throws Exception {
-        mockMvc.perform(get("/api/category"))
+        mockMvc.perform(get("/api/categories"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -65,7 +65,7 @@ class CategoryControllerTest {
                 new CategoryResponseDTO(2L, "Hauptgang")
         ));
 
-        mockMvc.perform(get("/api/category").with(jwtWithRole(ROLE_USER)))
+        mockMvc.perform(get("/api/categories").with(jwtWithRole(ROLE_USER)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].name").value("Dessert"));
@@ -76,7 +76,7 @@ class CategoryControllerTest {
         given(categoryService.findById(1L))
                 .willReturn(new CategoryResponseDTO(1L, "Dessert"));
 
-        mockMvc.perform(get("/api/category/1").with(jwtWithRole(ROLE_USER)))
+        mockMvc.perform(get("/api/categories/1").with(jwtWithRole(ROLE_USER)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Dessert"));
@@ -87,13 +87,13 @@ class CategoryControllerTest {
         given(categoryService.findById(99L))
                 .willThrow(new NotFoundException("Kategorie 99 nicht gefunden"));
 
-        mockMvc.perform(get("/api/category/99").with(jwtWithRole(ROLE_USER)))
+        mockMvc.perform(get("/api/categories/99").with(jwtWithRole(ROLE_USER)))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     void create_asUser_returns403() throws Exception {
-        mockMvc.perform(post("/api/category")
+        mockMvc.perform(post("/api/categories")
                         .with(jwtWithRole(ROLE_USER))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new CategoryRequestDTO("Dessert"))))
@@ -105,7 +105,7 @@ class CategoryControllerTest {
         given(categoryService.create(any()))
                 .willReturn(new CategoryResponseDTO(5L, "Dessert"));
 
-        mockMvc.perform(post("/api/category")
+        mockMvc.perform(post("/api/categories")
                         .with(jwtWithRole(ROLE_CHEF))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new CategoryRequestDTO("Dessert"))))
@@ -116,7 +116,7 @@ class CategoryControllerTest {
 
     @Test
     void create_blankName_returns400() throws Exception {
-        mockMvc.perform(post("/api/category")
+        mockMvc.perform(post("/api/categories")
                         .with(jwtWithRole(ROLE_CHEF))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new CategoryRequestDTO(""))))
@@ -128,7 +128,7 @@ class CategoryControllerTest {
         given(categoryService.create(any()))
                 .willThrow(new ConflictException("Kategorie 'Dessert' existiert bereits"));
 
-        mockMvc.perform(post("/api/category")
+        mockMvc.perform(post("/api/categories")
                         .with(jwtWithRole(ROLE_CHEF))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new CategoryRequestDTO("Dessert"))))
@@ -140,7 +140,7 @@ class CategoryControllerTest {
         given(categoryService.update(eq(1L), any()))
                 .willReturn(new CategoryResponseDTO(1L, "Dessert neu"));
 
-        mockMvc.perform(put("/api/category/1")
+        mockMvc.perform(put("/api/categories/1")
                         .with(jwtWithRole(ROLE_CHEF))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new CategoryRequestDTO("Dessert neu"))))
@@ -150,7 +150,7 @@ class CategoryControllerTest {
 
     @Test
     void update_asUser_returns403() throws Exception {
-        mockMvc.perform(put("/api/category/1")
+        mockMvc.perform(put("/api/categories/1")
                         .with(jwtWithRole(ROLE_USER))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new CategoryRequestDTO("X"))))
@@ -161,7 +161,7 @@ class CategoryControllerTest {
     void delete_asAdmin_returns204() throws Exception {
         doNothing().when(categoryService).delete(1L);
 
-        mockMvc.perform(delete("/api/category/1").with(jwtWithRole(ROLE_ADMIN)))
+        mockMvc.perform(delete("/api/categories/1").with(jwtWithRole(ROLE_ADMIN)))
                 .andExpect(status().isNoContent());
 
         verify(categoryService).delete(1L);
@@ -169,7 +169,7 @@ class CategoryControllerTest {
 
     @Test
     void delete_asChef_returns403() throws Exception {
-        mockMvc.perform(delete("/api/category/1").with(jwtWithRole(ROLE_CHEF)))
+        mockMvc.perform(delete("/api/categories/1").with(jwtWithRole(ROLE_CHEF)))
                 .andExpect(status().isForbidden());
     }
 
@@ -178,7 +178,7 @@ class CategoryControllerTest {
         willThrow(new NotFoundException("Kategorie 99 nicht gefunden"))
                 .given(categoryService).delete(99L);
 
-        mockMvc.perform(delete("/api/category/99").with(jwtWithRole(ROLE_ADMIN)))
+        mockMvc.perform(delete("/api/categories/99").with(jwtWithRole(ROLE_ADMIN)))
                 .andExpect(status().isNotFound());
     }
 
