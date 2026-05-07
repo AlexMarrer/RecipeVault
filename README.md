@@ -95,7 +95,7 @@ Nach dem Start:
 | `RecipeController` | `/api/recipes` | Lesen: alle Schreiben: `chef`/`admin` (Owner-Check) |
 | `IngredientController` | `/api/ingredients` | Lesen: alle Schreiben: `chef`/`admin` Löschen: `admin` |
 | `CategoryController` | `/api/categories` | Lesen: alle Schreiben: `chef`/`admin` Löschen: `admin` |
-| `RatingController` | `/api/ratings` (`/recipe/{recipeId}`, `/me`, `/{id}`) | Alle authentifizierten User · Owner-Check für Update/Delete |
+| `RatingController` | `/api/ratings` (`/me`, `/{id}`) | Alle authentifizierten User · Owner-Check für Update/Delete |
 
 Detailbeschreibung siehe Swagger UI nach dem Start.
 
