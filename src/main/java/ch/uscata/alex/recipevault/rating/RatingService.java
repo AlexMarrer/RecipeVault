@@ -24,6 +24,12 @@ public class RatingService {
     private final RecipeRepository recipeRepo;
     private final RatingMapper mapper;
 
+    public List<RatingResponseDTO> findAll() {
+        return ratingRepo.findAll().stream()
+                .map(mapper::toResponse)
+                .toList();
+    }
+
     public List<RatingResponseDTO> findByRecipe(Long recipeId) {
         if (!recipeRepo.existsById(recipeId)) {
             throw new NotFoundException("Rezept " + recipeId + " nicht gefunden");
@@ -44,7 +50,8 @@ public class RatingService {
     }
 
     @Transactional
-    public RatingResponseDTO create(Long recipeId, RatingRequestDTO dto, UUID userId) {
+    public RatingResponseDTO create(RatingRequestDTO dto, UUID userId) {
+        Long recipeId = dto.recipeId();
         Recipe recipe = recipeRepo.findById(recipeId)
                 .orElseThrow(() -> new NotFoundException("Rezept " + recipeId + " nicht gefunden"));
 

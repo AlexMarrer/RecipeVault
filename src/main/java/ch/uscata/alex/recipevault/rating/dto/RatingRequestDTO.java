@@ -8,6 +8,9 @@ import jakarta.validation.constraints.Size;
 public record RatingRequestDTO(
 
         @NotNull
+        Long recipeId,
+
+        @NotNull
         @Min(1)
         @Max(5)
         Integer stars,

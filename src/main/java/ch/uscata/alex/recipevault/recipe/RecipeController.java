@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/recipe")
+@RequestMapping("/api/recipes")
 @RequiredArgsConstructor
 @Tag(name = "Recipe", description = "Verwaltung von Rezepten inkl. Sektionen, Zutaten und Kategorien")
 public class RecipeController {
