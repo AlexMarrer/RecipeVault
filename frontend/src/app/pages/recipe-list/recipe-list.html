@@ -1,0 +1,17 @@
+<section class="recipe-list">
+  <h1 class="recipe-list__heading">Rezepte</h1>
+
+  @if (loading()) {
+    <p class="recipe-list__status">Lade Rezepte…</p>
+  } @else if (error()) {
+    <p class="recipe-list__status recipe-list__status--error">{{ error() }}</p>
+  } @else {
+    <ul class="recipe-list__items">
+      @for (recipe of recipes(); track recipe.id) {
+        <li class="recipe-list__item">{{ recipe.title }}</li>
+      } @empty {
+        <li class="recipe-list__item recipe-list__item--empty">Noch keine Rezepte vorhanden.</li>
+      }
+    </ul>
+  }
+</section>

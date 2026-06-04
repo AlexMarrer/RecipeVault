@@ -1,0 +1,12 @@
+<nav class="navbar">
+  <a [routerLink]="recipesUrl" class="navbar__brand">RecipeVault</a>
+
+  <div class="navbar__actions">
+    @if (isLoggedIn()) {
+      <span class="navbar__user">{{ username() }}</span>
+      <button type="button" class="navbar__button" (click)="logout()">Logout</button>
+    } @else {
+      <button type="button" class="navbar__button" (click)="login()">Login</button>
+    }
+  </div>
+</nav>

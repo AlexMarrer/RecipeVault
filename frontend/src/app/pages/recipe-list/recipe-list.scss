@@ -1,0 +1,33 @@
+.recipe-list__heading {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.recipe-list__status {
+  opacity: 0.8;
+}
+
+.recipe-list__status--error {
+  color: #b00020;
+  opacity: 1;
+}
+
+.recipe-list__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.recipe-list__item {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.recipe-list__item--empty {
+  opacity: 0.6;
+  font-style: italic;
+}
