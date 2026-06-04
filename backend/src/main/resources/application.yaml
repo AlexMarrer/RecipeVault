@@ -23,3 +23,5 @@ app:
   name: recipevault
   keycloak:
     client-name: recipevault
+  cors:
+    allowed-origins: http://localhost:4200
