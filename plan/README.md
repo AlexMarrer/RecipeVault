@@ -22,7 +22,7 @@ Acceptance Criteria → Status hier aktualisieren.
 | [5](phase-5-services/) | Services (1 pro Controller) | ✅ erledigt |
 | [6](phase-6-guards-directive/) | Guards + Directive | ✅ erledigt |
 | [7](phase-7-e2e-smoke/) | End-to-End-Nachweis | 🟡 Code fertig, manueller Login-Test offen (braucht Phase 0) |
-| [8](phase-8-verification/) | Verifikation (Build) | ✅ erledigt |
+| [8](phase-8-verification/) | Verifikation (Build) | ✅ erledigt (Backend BUILD SUCCESS, Frontend SPA ohne SSR) |
 
 **Status-Legende:** ⬜ offen · 🟡 in Arbeit · ✅ erledigt
 
