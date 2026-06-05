@@ -42,6 +42,22 @@ Mindestanforderungen ab, siehe Matrix unten).
 | [15](phase-15-unit-tests/) | Unit Tests (Vitest: Service + Komponente) | ⬜ offen |
 | [16](phase-16-doku-abgabe/) | Dokumentation & GitHub-Abgabe | ⬜ offen |
 
+## Status – Teil C: Zusatz-Features Rezept-Editor
+
+Neu beauftragt (2026-06-05). **Alle drei sind Frontend-only** — `defaultUnit` ist bereits
+end-to-end vorhanden, Stammdaten-Create-Endpunkte existieren, und `sortOrder`/`stepNumber` werden
+ohnehin aus dem Array-Index abgeleitet.
+
+| Phase | Thema | Status |
+|------|-------|--------|
+| [17](phase-17-editor-dragdrop/) | Drag & Drop für Sektionen, Schritte, Zutaten (CDK) | ⬜ offen |
+| [18](phase-18-editor-inline-stammdaten/) | Zutaten & Kategorien inline im Rezept-Formular anlegen | ⬜ offen |
+| [19](phase-19-editor-default-einheit/) | Standard-Einheit der Zutat automatisch übernehmen | ⬜ offen |
+
+**Empfohlene Reihenfolge ab hier:** 14b (Styling) → **17 → 18 → 19** (Features) → **15** (Tests,
+decken die neuen Editor-Features mit ab) → **16** (Doku/Abgabe). Die Feature-Phasen sind bewusst
+höher nummeriert, laufen aber **vor** Tests/Doku, damit diese den finalen Stand abbilden.
+
 **Status-Legende:** ⬜ offen · 🟡 in Arbeit · ✅ erledigt
 
 ## Abdeckung der Bewertungs-Mindestanforderungen
