@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RecipeService } from '../../service/recipe.service';
 import { CategoryService } from '../../service/category.service';
 import { IngredientService } from '../../service/ingredient.service';
@@ -25,6 +26,7 @@ import { RouteUrl } from '../../core/routes';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    DragDropModule,
   ],
   templateUrl: './recipe-form.html',
   styleUrl: './recipe-form.scss',
@@ -116,6 +118,26 @@ export class RecipeFormPage implements OnInit {
 
   protected removeIngredient(index: number): void {
     this.ingredientLines.removeAt(index);
+  }
+
+  protected dropIngredient(event: CdkDragDrop<unknown>): void {
+    this.reorder(this.ingredientLines, event.previousIndex, event.currentIndex);
+  }
+
+  protected dropSection(event: CdkDragDrop<unknown>): void {
+    this.reorder(this.sections, event.previousIndex, event.currentIndex);
+  }
+
+  protected dropStep(sectionIndex: number, event: CdkDragDrop<unknown>): void {
+    this.reorder(this.sectionSteps(sectionIndex), event.previousIndex, event.currentIndex);
+  }
+
+  private reorder(array: FormArray, previousIndex: number, currentIndex: number): void {
+    if (previousIndex === currentIndex) {
+      return;
+    }
+    moveItemInArray(array.controls, previousIndex, currentIndex);
+    array.updateValueAndValidity();
   }
 
   protected submit(): void {

@@ -50,7 +50,7 @@ ohnehin aus dem Array-Index abgeleitet.
 
 | Phase | Thema | Status |
 |------|-------|--------|
-| [17](phase-17-editor-dragdrop/) | Drag & Drop für Sektionen, Schritte, Zutaten (CDK) | ⬜ offen |
+| [17](phase-17-editor-dragdrop/) | Drag & Drop für Sektionen, Schritte, Zutaten (CDK) | ✅ erledigt (Build + Lint grün) |
 | [18](phase-18-editor-inline-stammdaten/) | Zutaten & Kategorien inline im Rezept-Formular anlegen | ⬜ offen |
 | [19](phase-19-editor-default-einheit/) | Standard-Einheit der Zutat automatisch übernehmen | ⬜ offen |
 

@@ -109,3 +109,33 @@
   justify-content: flex-end;
   gap: 0.75rem;
 }
+
+.recipe-form__droplist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.recipe-form__drag-handle {
+  cursor: move;
+  color: var(--mat-sys-on-surface-variant);
+  touch-action: none;
+}
+
+.cdk-drag-preview {
+  border-radius: 0.5rem;
+  background: var(--mat-sys-surface-container-high);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.4;
+}
+
+.cdk-drag-animating {
+  transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.recipe-form__droplist.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+  transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
