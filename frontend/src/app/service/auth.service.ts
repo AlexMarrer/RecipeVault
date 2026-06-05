@@ -29,7 +29,8 @@ export class AuthService {
 
   get roles(): string[] {
     const claims = this.decodeAccessToken();
-    return claims?.resource_access?.[environment.apiClientName]?.roles ?? [];
+    const raw = claims?.resource_access?.[environment.apiClientName]?.roles ?? [];
+    return raw.map((role) => role.replace(/^ROLE_/, ''));
   }
 
   hasRole(role: string): boolean {
