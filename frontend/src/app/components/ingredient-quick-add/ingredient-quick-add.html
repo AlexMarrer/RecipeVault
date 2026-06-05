@@ -1,0 +1,29 @@
+<div class="quick-add">
+  <div class="quick-add__panel" role="dialog" aria-modal="true">
+    <h2 class="quick-add__title">Neue Zutat anlegen</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="quick-add__form">
+      <mat-form-field appearance="outline" class="quick-add__field">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        @if (form.get('name')?.touched && form.get('name')?.hasError('required')) {
+          <mat-error>Name ist erforderlich.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="quick-add__field">
+        <mat-label>Standard-Einheit (optional)</mat-label>
+        <input matInput formControlName="defaultUnit" />
+      </mat-form-field>
+
+      @if (error()) {
+        <p class="quick-add__error">{{ error() }}</p>
+      }
+
+      <div class="quick-add__actions">
+        <button matButton type="button" (click)="cancelled.emit()">Abbrechen</button>
+        <button matButton="filled" type="submit" [disabled]="saving()">Anlegen</button>
+      </div>
+    </form>
+  </div>
+</div>

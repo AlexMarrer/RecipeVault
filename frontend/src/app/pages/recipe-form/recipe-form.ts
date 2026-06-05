@@ -7,6 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { IngredientQuickAddDialog } from '../../components/ingredient-quick-add/ingredient-quick-add';
+import { CategoryQuickAddDialog } from '../../components/category-quick-add/category-quick-add';
 import { RecipeService } from '../../service/recipe.service';
 import { CategoryService } from '../../service/category.service';
 import { IngredientService } from '../../service/ingredient.service';
@@ -27,6 +29,8 @@ import { RouteUrl } from '../../core/routes';
     MatButtonModule,
     MatIconModule,
     DragDropModule,
+    IngredientQuickAddDialog,
+    CategoryQuickAddDialog,
   ],
   templateUrl: './recipe-form.html',
   styleUrl: './recipe-form.scss',
@@ -47,6 +51,8 @@ export class RecipeFormPage implements OnInit {
   protected readonly difficultyLabel = DIFFICULTY_LABEL;
   protected readonly saving = signal(false);
   protected readonly error = signal<string | null>(null);
+  protected readonly showIngredientDialog = signal(false);
+  protected readonly showCategoryDialog = signal(false);
 
   protected readonly isEdit = computed(() => this.id() != null);
   protected readonly cancelUrl = computed(() =>
@@ -116,6 +122,20 @@ export class RecipeFormPage implements OnInit {
     this.ingredientLines.push(this.newIngredientGroup());
   }
 
+  protected applyDefaultUnit(lineIndex: number): void {
+    const line = this.ingredientLines.at(lineIndex);
+    const ingredientId = line.get('ingredientId')!.value as number | null;
+    const unitControl = line.get('unit')!;
+    const currentUnit = ((unitControl.value as string) ?? '').trim();
+    if (ingredientId == null || currentUnit.length > 0) {
+      return;
+    }
+    const ingredient = this.ingredients().find((item) => item.id === ingredientId);
+    if (ingredient?.defaultUnit) {
+      unitControl.setValue(ingredient.defaultUnit);
+    }
+  }
+
   protected removeIngredient(index: number): void {
     this.ingredientLines.removeAt(index);
   }
@@ -130,6 +150,26 @@ export class RecipeFormPage implements OnInit {
 
   protected dropStep(sectionIndex: number, event: CdkDragDrop<unknown>): void {
     this.reorder(this.sectionSteps(sectionIndex), event.previousIndex, event.currentIndex);
+  }
+
+  protected onIngredientCreated(ingredient: Ingredient): void {
+    this.ingredients.update((list) =>
+      [...list, ingredient].sort((a, b) => a.name.localeCompare(b.name)),
+    );
+    this.showIngredientDialog.set(false);
+    const group = this.newIngredientGroup();
+    group.patchValue({ ingredientId: ingredient.id, unit: ingredient.defaultUnit ?? '' });
+    this.ingredientLines.push(group);
+  }
+
+  protected onCategoryCreated(category: Category): void {
+    this.categories.update((list) =>
+      [...list, category].sort((a, b) => a.name.localeCompare(b.name)),
+    );
+    this.showCategoryDialog.set(false);
+    const control = this.form.get('categoryIds')!;
+    const current = (control.value as number[]) ?? [];
+    control.setValue([...current, category.id]);
   }
 
   private reorder(array: FormArray, previousIndex: number, currentIndex: number): void {

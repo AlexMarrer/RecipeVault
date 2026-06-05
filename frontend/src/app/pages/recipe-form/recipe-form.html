@@ -49,22 +49,34 @@
     <input matInput formControlName="imageUrl" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Kategorien</mat-label>
-    <mat-select formControlName="categoryIds" multiple>
-      @for (category of categories(); track category.id) {
-        <mat-option [value]="category.id">{{ category.name }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+  <div class="recipe-form__category-row">
+    <mat-form-field appearance="outline" class="recipe-form__category-field">
+      <mat-label>Kategorien</mat-label>
+      <mat-select formControlName="categoryIds" multiple>
+        @for (category of categories(); track category.id) {
+          <mat-option [value]="category.id">{{ category.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button matButton type="button" (click)="showCategoryDialog.set(true)">
+      <mat-icon>library_add</mat-icon>
+      Neue Kategorie
+    </button>
+  </div>
 
   <section formArrayName="ingredients" class="recipe-form__block">
     <header class="recipe-form__block-head">
       <h2 class="recipe-form__block-title">Zutaten</h2>
-      <button matButton type="button" (click)="addIngredient()">
-        <mat-icon>add</mat-icon>
-        Zutat
-      </button>
+      <div class="recipe-form__block-actions">
+        <button matButton type="button" (click)="showIngredientDialog.set(true)">
+          <mat-icon>library_add</mat-icon>
+          Neue Zutat
+        </button>
+        <button matButton type="button" (click)="addIngredient()">
+          <mat-icon>add</mat-icon>
+          Zeile
+        </button>
+      </div>
     </header>
 
     <div class="recipe-form__droplist" cdkDropList (cdkDropListDropped)="dropIngredient($event)">
@@ -81,7 +93,7 @@
           </button>
           <mat-form-field appearance="outline" class="recipe-form__ingredient-name">
             <mat-label>Zutat</mat-label>
-            <mat-select formControlName="ingredientId">
+            <mat-select formControlName="ingredientId" (selectionChange)="applyDefaultUnit(i)">
               @for (ingredient of ingredients(); track ingredient.id) {
                 <mat-option [value]="ingredient.id">{{ ingredient.name }}</mat-option>
               }
@@ -174,3 +186,17 @@
     </button>
   </div>
 </form>
+
+@if (showIngredientDialog()) {
+  <app-ingredient-quick-add
+    (created)="onIngredientCreated($event)"
+    (cancelled)="showIngredientDialog.set(false)"
+  />
+}
+
+@if (showCategoryDialog()) {
+  <app-category-quick-add
+    (created)="onCategoryCreated($event)"
+    (cancelled)="showCategoryDialog.set(false)"
+  />
+}

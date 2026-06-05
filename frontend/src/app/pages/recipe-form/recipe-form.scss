@@ -49,6 +49,23 @@
   font: var(--mat-sys-title-medium);
 }
 
+.recipe-form__block-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.recipe-form__category-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.recipe-form__category-field {
+  flex: 1 1 16rem;
+}
+
 .recipe-form__ingredient {
   display: flex;
   flex-wrap: wrap;

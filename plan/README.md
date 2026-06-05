@@ -51,8 +51,8 @@ ohnehin aus dem Array-Index abgeleitet.
 | Phase | Thema | Status |
 |------|-------|--------|
 | [17](phase-17-editor-dragdrop/) | Drag & Drop für Sektionen, Schritte, Zutaten (CDK) | ✅ erledigt (Build + Lint grün) |
-| [18](phase-18-editor-inline-stammdaten/) | Zutaten & Kategorien inline im Rezept-Formular anlegen | ⬜ offen |
-| [19](phase-19-editor-default-einheit/) | Standard-Einheit der Zutat automatisch übernehmen | ⬜ offen |
+| [18](phase-18-editor-inline-stammdaten/) | Zutaten & Kategorien inline im Rezept-Formular anlegen | ✅ erledigt (Build + Lint grün) |
+| [19](phase-19-editor-default-einheit/) | Standard-Einheit der Zutat automatisch übernehmen | ✅ erledigt (Build + Lint grün) |
 
 **Empfohlene Reihenfolge ab hier:** 14b (Styling) → **17 → 18 → 19** (Features) → **15** (Tests,
 decken die neuen Editor-Features mit ab) → **16** (Doku/Abgabe). Die Feature-Phasen sind bewusst
