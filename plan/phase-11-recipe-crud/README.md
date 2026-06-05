@@ -26,6 +26,12 @@ verschachtelter Sektionen/Schritte/Zutaten. Schreibende Routen sind per `roleGua
 
 - `RoutePath`/`RouteUrl` um `recipeNew`, `recipeEdit`, `myRecipes` erweitern.
 
+## Styling
+
+UI **gleich material-konform** bauen: `mat-form-field` + `matInput`/`mat-select` für die Felder,
+`matButton` für Aktionen, Theme-Variablen statt fixer Farben. Finaler Konsistenz-Check in
+[Phase 14b](../phase-14b-styling/).
+
 ## Betroffene Dateien
 
 - `frontend/src/app/pages/recipe-form/…` (neu)

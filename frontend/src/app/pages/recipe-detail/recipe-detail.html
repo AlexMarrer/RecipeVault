@@ -1,0 +1,93 @@
+@if (loading()) {
+  <p class="recipe-detail__status">Lade Rezept…</p>
+} @else if (error()) {
+  <p class="recipe-detail__status recipe-detail__status--error">{{ error() }}</p>
+} @else if (recipe(); as recipe) {
+  <article class="recipe-detail">
+    <header class="recipe-detail__header">
+      <div class="recipe-detail__heading-group">
+        <h1 class="recipe-detail__title">{{ recipe.title }}</h1>
+        <div class="recipe-detail__rating">
+          <app-star-rating [value]="recipe.averageRating ?? 0" />
+          <span class="recipe-detail__rating-count">({{ recipe.ratingCount }} Bewertungen)</span>
+        </div>
+      </div>
+
+      @if (canManage()) {
+        <div class="recipe-detail__actions">
+          <a matButton="outlined" [routerLink]="editUrl()">
+            <mat-icon>edit</mat-icon>
+            Bearbeiten
+          </a>
+          <button matButton="outlined" type="button" class="recipe-detail__delete" (click)="showDeleteDialog.set(true)">
+            <mat-icon>delete</mat-icon>
+            Löschen
+          </button>
+        </div>
+      }
+    </header>
+
+    @if (recipe.imageUrl) {
+      <img class="recipe-detail__image" [src]="recipe.imageUrl" [alt]="recipe.title" />
+    }
+
+    @if (recipe.description) {
+      <p class="recipe-detail__description">{{ recipe.description }}</p>
+    }
+
+    <ul class="recipe-detail__facts">
+      <li class="recipe-detail__fact">Schwierigkeit: {{ difficultyLabel() }}</li>
+      <li class="recipe-detail__fact">Portionen: {{ recipe.servings }}</li>
+      <li class="recipe-detail__fact">Vorbereitung: {{ recipe.prepTimeMinutes }} Min.</li>
+      <li class="recipe-detail__fact">Kochen: {{ recipe.cookTimeMinutes }} Min.</li>
+    </ul>
+
+    @if (recipe.categories.length > 0) {
+      <ul class="recipe-detail__tags">
+        @for (category of recipe.categories; track category.id) {
+          <li class="recipe-detail__tag">{{ category.name }}</li>
+        }
+      </ul>
+    }
+
+    <section class="recipe-detail__block">
+      <h2 class="recipe-detail__block-title">Zutaten</h2>
+      <ul class="recipe-detail__ingredients">
+        @for (line of recipe.ingredients; track line.id) {
+          <li class="recipe-detail__ingredient">
+            {{ line.amount }} {{ line.unit }} {{ line.ingredientName }}
+          </li>
+        } @empty {
+          <li class="recipe-detail__ingredient recipe-detail__ingredient--empty">
+            Keine Zutaten erfasst.
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="recipe-detail__block">
+      <h2 class="recipe-detail__block-title">Zubereitung</h2>
+      @for (section of sortedSections(); track section.id) {
+        <div class="recipe-detail__section">
+          <h3 class="recipe-detail__section-title">{{ section.title }}</h3>
+          <ol class="recipe-detail__steps">
+            @for (step of section.steps; track step.id) {
+              <li class="recipe-detail__step">{{ step.instruction }}</li>
+            }
+          </ol>
+        </div>
+      } @empty {
+        <p class="recipe-detail__status">Keine Zubereitungsschritte erfasst.</p>
+      }
+    </section>
+  </article>
+
+  @if (showDeleteDialog()) {
+    <app-confirm-dialog
+      title="Rezept löschen"
+      [message]="'„' + recipe.title + '“ wirklich löschen?'"
+      (confirmed)="confirmDelete()"
+      (cancelled)="showDeleteDialog.set(false)"
+    />
+  }
+}

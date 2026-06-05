@@ -32,12 +32,13 @@ Mindestanforderungen ab, siehe Matrix unten).
 
 | Phase | Thema | Status |
 |------|-------|--------|
-| [9](phase-9-shared-components/) | Basis-Komponenten (StarRating, RecipeCard, ConfirmDialog) | ⬜ offen |
-| [10](phase-10-recipe-read/) | Rezepte lesen: Liste + Detailseite | ⬜ offen |
+| [9](phase-9-shared-components/) | Basis-Komponenten (StarRating, RecipeCard, ConfirmDialog) | ✅ erledigt (Build + Lint grün) |
+| [10](phase-10-recipe-read/) | Rezepte lesen: Liste + Detailseite | ✅ erledigt (Build + Lint grün) |
 | [11](phase-11-recipe-crud/) | Rezept-CRUD (anlegen/bearbeiten/löschen) + Meine Rezepte | ⬜ offen |
 | [12](phase-12-stammdaten-crud/) | Kategorien & Zutaten verwalten (CRUD) | ⬜ offen |
 | [13](phase-13-ratings/) | Bewertungen im Frontend (Rating-CRUD) | ⬜ offen |
 | [14](phase-14-navigation-roles/) | Navigation, Rollen-Sichtbarkeit, Routing-Feinschliff | ⬜ offen |
+| [14b](phase-14b-styling/) | **Styling & Design-System** (Material-Look + BEM-Tokens, Nachhol 9/10) | 🟡 Nachhol 9/10 erledigt, globaler Schliff offen |
 | [15](phase-15-unit-tests/) | Unit Tests (Vitest: Service + Komponente) | ⬜ offen |
 | [16](phase-16-doku-abgabe/) | Dokumentation & GitHub-Abgabe | ⬜ offen |
 
@@ -57,6 +58,7 @@ Mindestanforderungen ab, siehe Matrix unten).
 | Routing | Phase 7 + erweitert in 10/11/12/14 |
 | Unit Tests (Vitest) | Phase 15 |
 | Ablage GitHub | Phase 16 |
+| Sauberes, konsistentes Design (fließt in „saubere Arbeitsweise") | Inline in 9–14 + gebündelt in Phase 14b |
 
 ## Eckdaten
 

@@ -11,7 +11,7 @@ export class HasRoleDirective {
   private hasView = false;
 
   @Input()
-  set appHasRole(role: string | string[]) {
+  set appHasRole(role: string | readonly string[]) {
     const required = Array.isArray(role) ? role : [role];
     const allowed = required.some((r) => this.auth.hasRole(r));
 

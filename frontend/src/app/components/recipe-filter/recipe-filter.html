@@ -1,0 +1,35 @@
+<form class="recipe-filter" (ngSubmit)="apply()">
+  <mat-form-field
+    appearance="outline"
+    subscriptSizing="dynamic"
+    class="recipe-filter__field recipe-filter__field--title"
+  >
+    <mat-label>Titel suchen</mat-label>
+    <input matInput type="text" name="title" [(ngModel)]="title" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="recipe-filter__field">
+    <mat-label>Kategorie</mat-label>
+    <mat-select name="categoryId" [(ngModel)]="categoryId">
+      <mat-option [value]="null">Alle Kategorien</mat-option>
+      @for (category of categories(); track category.id) {
+        <mat-option [value]="category.id">{{ category.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="recipe-filter__field">
+    <mat-label>Schwierigkeit</mat-label>
+    <mat-select name="difficulty" [(ngModel)]="difficulty">
+      <mat-option [value]="''">Alle</mat-option>
+      @for (level of difficulties; track level) {
+        <mat-option [value]="level">{{ difficultyLabel[level] }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button matButton="filled" type="submit" class="recipe-filter__button">Filtern</button>
+  <button matButton type="button" class="recipe-filter__button" (click)="reset()">
+    Zurücksetzen
+  </button>
+</form>

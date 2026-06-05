@@ -23,6 +23,13 @@ Detailseite über einen Routen-Parameter. Damit ist Routing mit Parametern nachg
 - `RoutePath`/`RouteUrl` (in `core/routes.ts`) um `recipeDetail` (`recipes/:id`) ergänzen –
   keine Magic Strings in Templates.
 
+## Styling
+
+✅ **Nachhol erledigt (2026-06-05):** Hartkodierte Farben (`#2e7d32`, `#b00020`) ersetzt durch
+Theme-Variablen. Filter auf `mat-form-field` + `mat-select`, „Neu"/Bearbeiten/Löschen auf
+`matButton` + `mat-icon`, Status-/Fehlertexte über `--mat-sys-*`. Restliche globale Politur
+(mat-toolbar, mat-card, Spinner, Responsive) in [Phase 14b](../phase-14b-styling/).
+
 ## Betroffene Dateien
 
 - `frontend/src/app/pages/recipe-list/…` (Umbau)

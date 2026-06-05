@@ -1,14 +1,24 @@
 <section class="recipe-list">
-  <h1 class="recipe-list__heading">Rezepte</h1>
+  <header class="recipe-list__header">
+    <h1 class="recipe-list__heading">Rezepte</h1>
+    <a *appHasRole="manageRoles" matButton="filled" [routerLink]="newRecipeUrl">
+      <mat-icon>add</mat-icon>
+      Neues Rezept
+    </a>
+  </header>
+
+  <app-recipe-filter (filterChange)="applyFilter($event)" />
 
   @if (loading()) {
     <p class="recipe-list__status">Lade Rezepte…</p>
   } @else if (error()) {
     <p class="recipe-list__status recipe-list__status--error">{{ error() }}</p>
   } @else {
-    <ul class="recipe-list__items">
+    <ul class="recipe-list__grid">
       @for (recipe of recipes(); track recipe.id) {
-        <li class="recipe-list__item">{{ recipe.title }}</li>
+        <li class="recipe-list__item">
+          <app-recipe-card [recipe]="recipe" />
+        </li>
       } @empty {
         <li class="recipe-list__item recipe-list__item--empty">Noch keine Rezepte vorhanden.</li>
       }

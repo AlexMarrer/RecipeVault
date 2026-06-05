@@ -1,0 +1,25 @@
+<div class="star-rating" [class.star-rating--interactive]="interactive()">
+  @for (star of stars(); track star.position) {
+    @if (interactive()) {
+      <button
+        type="button"
+        class="star-rating__star star-rating__star--button"
+        [class.star-rating__star--filled]="star.filled"
+        [attr.aria-label]="star.position + ' von ' + max() + ' Sternen'"
+        (click)="select(star.position)"
+      >
+        ★
+      </button>
+    } @else {
+      <span
+        class="star-rating__star"
+        [class.star-rating__star--filled]="star.filled"
+        >★</span
+      >
+    }
+  }
+
+  @if (!interactive() && value() > 0) {
+    <span class="star-rating__value">{{ value().toFixed(1) }}</span>
+  }
+</div>

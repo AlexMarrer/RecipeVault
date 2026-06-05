@@ -1,0 +1,26 @@
+<a class="recipe-card" [routerLink]="detailUrl()">
+  @if (recipe().imageUrl) {
+    <img class="recipe-card__image" [src]="recipe().imageUrl" [alt]="recipe().title" />
+  }
+
+  <div class="recipe-card__body">
+    <h2 class="recipe-card__title">{{ recipe().title }}</h2>
+    <p class="recipe-card__meta">
+      {{ difficultyLabel() }} · {{ recipe().servings }} Portionen ·
+      {{ recipe().prepTimeMinutes + recipe().cookTimeMinutes }} Min.
+    </p>
+
+    @if (recipe().categories.length > 0) {
+      <ul class="recipe-card__tags">
+        @for (category of recipe().categories; track category.id) {
+          <li class="recipe-card__tag">{{ category.name }}</li>
+        }
+      </ul>
+    }
+
+    <div class="recipe-card__rating">
+      <app-star-rating [value]="recipe().averageRating ?? 0" />
+      <span class="recipe-card__rating-count">({{ recipe().ratingCount }})</span>
+    </div>
+  </div>
+</a>

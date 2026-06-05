@@ -17,6 +17,12 @@ Detailseite.
   - `409` (bereits bewertet) sauber abfangen → in Edit-Modus wechseln.
 - Einbindung beider Komponenten in `RecipeDetailPage`; nach Absenden Liste + Ø aktualisieren.
 
+## Styling
+
+UI **gleich material-konform** bauen: `mat-form-field` fürs Kommentarfeld, `matButton` für
+Absenden/Löschen, StarRating + Bewertungsliste an das Theme angeglichen (Theme-Variablen).
+Finaler Konsistenz-Check in [Phase 14b](../phase-14b-styling/).
+
 ## Betroffene Dateien
 
 - `frontend/src/app/components/rating-list/…` (neu)

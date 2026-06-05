@@ -18,6 +18,12 @@ Routing + rollenbasierte Sichtbarkeit konsequent greifen.
   bleiben am Ende.
 - Optionale, kleine **`HomePage`**/Landing als Einstieg (zählt als weitere Komponente).
 
+## Styling
+
+Navbar **gleich** als `mat-toolbar` umsetzen (statt eigenem `<nav>`), aktive Links + rollen-
+abhängige Einträge darin. Der globale Look (Container, Spacing, Tokens) wird direkt danach in
+[Phase 14b](../phase-14b-styling/) finalisiert.
+
 ## Betroffene Dateien
 
 - `frontend/src/app/components/navbar/…`

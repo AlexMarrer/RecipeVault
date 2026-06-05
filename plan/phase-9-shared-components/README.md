@@ -22,6 +22,13 @@ Komponenten zur geforderten Mindestzahl (≥ 8) und halten die Pages später sch
 - SCSS strikt BEM (`block__element--modifier`), Einheiten in `rem`, keine Tag-Selektoren.
 - Keine Magic Strings/Numbers (Sterne-Anzahl als Konstante).
 
+## Styling
+
+✅ **Nachhol erledigt (2026-06-05):** Hartkodierte Farben raus, alle Komponenten nutzen jetzt
+die cyan/orange-Theme-Variablen (`--mat-sys-*`). Stars in Tertiär-Farbe (orange), Karten mit
+Material-Elevation, ConfirmDialog auf `matButton` (Löschen rot via lokaler `--mat-sys-primary`-
+Override). Restliche globale Politur (mat-toolbar, mat-card) in [Phase 14b](../phase-14b-styling/).
+
 ## Betroffene Dateien
 
 - `frontend/src/app/components/star-rating/…`

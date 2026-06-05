@@ -20,6 +20,12 @@ Backend-Absicherung).
 
 - `RoutePath`/`RouteUrl` um `adminCategories`, `adminIngredients` erweitern.
 
+## Styling
+
+UI **gleich material-konform** bauen: Tabellen/Listen + `mat-form-field` für Inline-Formulare,
+`matButton`/`mat-icon-button` für Aktionen, Theme-Variablen statt fixer Farben. Finaler
+Konsistenz-Check in [Phase 14b](../phase-14b-styling/).
+
 ## Betroffene Dateien
 
 - `frontend/src/app/pages/category-admin/…` (neu)
