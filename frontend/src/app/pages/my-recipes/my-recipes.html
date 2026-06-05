@@ -1,0 +1,46 @@
+<section class="my-recipes">
+  <header class="my-recipes__header">
+    <h1 class="my-recipes__heading">Meine Rezepte</h1>
+    <a matButton="filled" [routerLink]="newRecipeUrl">
+      <mat-icon>add</mat-icon>
+      Neues Rezept
+    </a>
+  </header>
+
+  @if (loading()) {
+    <p class="my-recipes__status">Lade…</p>
+  } @else if (error()) {
+    <p class="my-recipes__status my-recipes__status--error">{{ error() }}</p>
+  } @else {
+    <ul class="my-recipes__list">
+      @for (recipe of recipes(); track recipe.id) {
+        <li class="my-recipes__item">
+          <a class="my-recipes__title" [routerLink]="detailUrl(recipe.id)">{{ recipe.title }}</a>
+          <app-star-rating [value]="recipe.averageRating ?? 0" />
+          <span class="my-recipes__spacer"></span>
+          <a matButton="outlined" [routerLink]="editUrl(recipe.id)">
+            <mat-icon>edit</mat-icon>
+            Bearbeiten
+          </a>
+          <button matButton="outlined" class="my-recipes__delete" (click)="deleteTarget.set(recipe)">
+            <mat-icon>delete</mat-icon>
+            Löschen
+          </button>
+        </li>
+      } @empty {
+        <li class="my-recipes__item my-recipes__item--empty">
+          Du hast noch keine Rezepte angelegt.
+        </li>
+      }
+    </ul>
+  }
+</section>
+
+@if (deleteTarget(); as target) {
+  <app-confirm-dialog
+    title="Rezept löschen"
+    [message]="'„' + target.title + '“ wirklich löschen?'"
+    (confirmed)="confirmDelete()"
+    (cancelled)="deleteTarget.set(null)"
+  />
+}

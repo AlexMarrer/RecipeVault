@@ -34,8 +34,8 @@ Mindestanforderungen ab, siehe Matrix unten).
 |------|-------|--------|
 | [9](phase-9-shared-components/) | Basis-Komponenten (StarRating, RecipeCard, ConfirmDialog) | ✅ erledigt (Build + Lint grün) |
 | [10](phase-10-recipe-read/) | Rezepte lesen: Liste + Detailseite | ✅ erledigt (Build + Lint grün) |
-| [11](phase-11-recipe-crud/) | Rezept-CRUD (anlegen/bearbeiten/löschen) + Meine Rezepte | ⬜ offen |
-| [12](phase-12-stammdaten-crud/) | Kategorien & Zutaten verwalten (CRUD) | ⬜ offen |
+| [11](phase-11-recipe-crud/) | Rezept-CRUD (anlegen/bearbeiten/löschen) + Meine Rezepte | ✅ erledigt (Build + Lint grün) |
+| [12](phase-12-stammdaten-crud/) | Kategorien & Zutaten verwalten (CRUD) | ✅ erledigt (Build + Lint grün) |
 | [13](phase-13-ratings/) | Bewertungen im Frontend (Rating-CRUD) | ⬜ offen |
 | [14](phase-14-navigation-roles/) | Navigation, Rollen-Sichtbarkeit, Routing-Feinschliff | ⬜ offen |
 | [14b](phase-14b-styling/) | **Styling & Design-System** (Material-Look + BEM-Tokens, Nachhol 9/10) | 🟡 Nachhol 9/10 erledigt, globaler Schliff offen |

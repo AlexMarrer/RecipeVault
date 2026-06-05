@@ -1,0 +1,143 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="recipe-form">
+  <h1 class="recipe-form__heading">{{ isEdit() ? 'Rezept bearbeiten' : 'Neues Rezept' }}</h1>
+
+  @if (error()) {
+    <p class="recipe-form__error">{{ error() }}</p>
+  }
+
+  <mat-form-field appearance="outline">
+    <mat-label>Titel</mat-label>
+    <input matInput formControlName="title" />
+    @if (form.get('title')?.touched && form.get('title')?.hasError('required')) {
+      <mat-error>Titel ist erforderlich.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Beschreibung</mat-label>
+    <textarea matInput rows="3" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <div class="recipe-form__row">
+    <mat-form-field appearance="outline">
+      <mat-label>Vorbereitung (Min.)</mat-label>
+      <input matInput type="number" formControlName="prepTimeMinutes" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Kochen (Min.)</mat-label>
+      <input matInput type="number" formControlName="cookTimeMinutes" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Portionen</mat-label>
+      <input matInput type="number" formControlName="servings" />
+      @if (form.get('servings')?.touched && form.get('servings')?.hasError('min')) {
+        <mat-error>Mindestens 1 Portion.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Schwierigkeit</mat-label>
+      <mat-select formControlName="difficulty">
+        @for (level of difficulties; track level) {
+          <mat-option [value]="level">{{ difficultyLabel[level] }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Bild-URL (optional)</mat-label>
+    <input matInput formControlName="imageUrl" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Kategorien</mat-label>
+    <mat-select formControlName="categoryIds" multiple>
+      @for (category of categories(); track category.id) {
+        <mat-option [value]="category.id">{{ category.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <section formArrayName="ingredients" class="recipe-form__block">
+    <header class="recipe-form__block-head">
+      <h2 class="recipe-form__block-title">Zutaten</h2>
+      <button matButton type="button" (click)="addIngredient()">
+        <mat-icon>add</mat-icon>
+        Zutat
+      </button>
+    </header>
+
+    @for (line of ingredientLines.controls; track line; let i = $index) {
+      <div class="recipe-form__ingredient" [formGroupName]="i">
+        <mat-form-field appearance="outline" class="recipe-form__ingredient-name">
+          <mat-label>Zutat</mat-label>
+          <mat-select formControlName="ingredientId">
+            @for (ingredient of ingredients(); track ingredient.id) {
+              <mat-option [value]="ingredient.id">{{ ingredient.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="recipe-form__ingredient-amount">
+          <mat-label>Menge</mat-label>
+          <input matInput type="number" formControlName="amount" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="recipe-form__ingredient-unit">
+          <mat-label>Einheit</mat-label>
+          <input matInput formControlName="unit" />
+        </mat-form-field>
+        <button matIconButton type="button" aria-label="Zutat entfernen" (click)="removeIngredient(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+  </section>
+
+  <section formArrayName="sections" class="recipe-form__block">
+    <header class="recipe-form__block-head">
+      <h2 class="recipe-form__block-title">Zubereitung</h2>
+      <button matButton type="button" (click)="addSection()">
+        <mat-icon>add</mat-icon>
+        Sektion
+      </button>
+    </header>
+
+    @for (section of sections.controls; track section; let si = $index) {
+      <div class="recipe-form__section" [formGroupName]="si">
+        <div class="recipe-form__section-head">
+          <mat-form-field appearance="outline" class="recipe-form__section-title">
+            <mat-label>Sektionstitel (z. B. Vorbereitung)</mat-label>
+            <input matInput formControlName="title" />
+          </mat-form-field>
+          <button matIconButton type="button" aria-label="Sektion entfernen" (click)="removeSection(si)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div formArrayName="steps" class="recipe-form__steps">
+          @for (step of sectionSteps(si).controls; track step; let sti = $index) {
+            <div class="recipe-form__step" [formGroupName]="sti">
+              <mat-form-field appearance="outline" class="recipe-form__step-field">
+                <mat-label>Schritt {{ sti + 1 }}</mat-label>
+                <input matInput formControlName="instruction" />
+              </mat-form-field>
+              <button matIconButton type="button" aria-label="Schritt entfernen" (click)="removeStep(si, sti)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          }
+          <button matButton type="button" (click)="addStep(si)">
+            <mat-icon>add</mat-icon>
+            Schritt
+          </button>
+        </div>
+      </div>
+    }
+  </section>
+
+  <div class="recipe-form__actions">
+    <a matButton type="button" [routerLink]="cancelUrl()">Abbrechen</a>
+    <button matButton="filled" type="submit" [disabled]="saving()">
+      {{ isEdit() ? 'Speichern' : 'Anlegen' }}
+    </button>
+  </div>
+</form>

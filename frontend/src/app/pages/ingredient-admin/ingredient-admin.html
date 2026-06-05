@@ -1,0 +1,61 @@
+<section class="admin">
+  <h1 class="admin__heading">Zutaten verwalten</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="admin__form">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="admin__field">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="admin__field admin__field--unit">
+      <mat-label>Einheit (optional)</mat-label>
+      <input matInput formControlName="defaultUnit" />
+    </mat-form-field>
+    <button matButton="filled" type="submit">{{ editingId() ? 'Speichern' : 'Anlegen' }}</button>
+    @if (editingId()) {
+      <button matButton type="button" (click)="cancelEdit()">Abbrechen</button>
+    }
+  </form>
+
+  @if (error()) {
+    <p class="admin__error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="admin__status">Lade…</p>
+  } @else {
+    <ul class="admin__list">
+      @for (ingredient of ingredients(); track ingredient.id) {
+        <li class="admin__item">
+          <span class="admin__name">{{ ingredient.name }}</span>
+          @if (ingredient.defaultUnit) {
+            <span class="admin__unit">{{ ingredient.defaultUnit }}</span>
+          }
+          <span class="admin__spacer"></span>
+          <button matIconButton aria-label="Bearbeiten" (click)="startEdit(ingredient)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            *appHasRole="adminRole"
+            matIconButton
+            class="admin__delete"
+            aria-label="Löschen"
+            (click)="deleteTarget.set(ingredient)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      } @empty {
+        <li class="admin__item admin__item--empty">Noch keine Zutaten.</li>
+      }
+    </ul>
+  }
+</section>
+
+@if (deleteTarget(); as target) {
+  <app-confirm-dialog
+    title="Zutat löschen"
+    [message]="'„' + target.name + '“ wirklich löschen?'"
+    (confirmed)="confirmDelete()"
+    (cancelled)="deleteTarget.set(null)"
+  />
+}

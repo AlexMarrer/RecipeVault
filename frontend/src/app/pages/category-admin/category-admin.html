@@ -1,0 +1,54 @@
+<section class="admin">
+  <h1 class="admin__heading">Kategorien verwalten</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="admin__form">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="admin__field">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <button matButton="filled" type="submit">{{ editingId() ? 'Speichern' : 'Anlegen' }}</button>
+    @if (editingId()) {
+      <button matButton type="button" (click)="cancelEdit()">Abbrechen</button>
+    }
+  </form>
+
+  @if (error()) {
+    <p class="admin__error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="admin__status">Lade…</p>
+  } @else {
+    <ul class="admin__list">
+      @for (category of categories(); track category.id) {
+        <li class="admin__item">
+          <span class="admin__name">{{ category.name }}</span>
+          <span class="admin__spacer"></span>
+          <button matIconButton aria-label="Bearbeiten" (click)="startEdit(category)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            *appHasRole="adminRole"
+            matIconButton
+            class="admin__delete"
+            aria-label="Löschen"
+            (click)="deleteTarget.set(category)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      } @empty {
+        <li class="admin__item admin__item--empty">Noch keine Kategorien.</li>
+      }
+    </ul>
+  }
+</section>
+
+@if (deleteTarget(); as target) {
+  <app-confirm-dialog
+    title="Kategorie löschen"
+    [message]="'„' + target.name + '“ wirklich löschen?'"
+    (confirmed)="confirmDelete()"
+    (cancelled)="deleteTarget.set(null)"
+  />
+}
