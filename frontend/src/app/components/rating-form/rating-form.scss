@@ -1,0 +1,35 @@
+.rating-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 0.75rem;
+}
+
+.rating-form__title {
+  margin: 0;
+  font: var(--mat-sys-title-medium);
+}
+
+.rating-form__comment {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.rating-form__hint {
+  margin: 0;
+  font: var(--mat-sys-body-small);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.rating-form__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rating-form__delete {
+  --mat-sys-primary: var(--mat-sys-error);
+  color: var(--mat-sys-error);
+}

@@ -55,6 +55,10 @@ public class RatingService {
         Recipe recipe = recipeRepo.findById(recipeId)
                 .orElseThrow(() -> new NotFoundException("Rezept " + recipeId + " nicht gefunden"));
 
+        if (recipe.getAuthorId().equals(userId)) {
+            throw new ConflictException("Du kannst dein eigenes Rezept nicht bewerten");
+        }
+
         if (ratingRepo.existsByRecipeIdAndUserId(recipeId, userId)) {
             throw new ConflictException("Du hast dieses Rezept bereits bewertet");
         }

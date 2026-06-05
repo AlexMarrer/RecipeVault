@@ -3,8 +3,7 @@
 - [ ] Globale Basis in `styles.scss`: Layout-Container + Spacing-/Radius-Skala (BEM)
       *(box-sizing-Reset bereits gesetzt; Container existiert in `app.scss`)*
 - [x] Keine hartkodierten Farben mehr in eigenen Komponenten → `--mat-sys-*`-Variablen
-- [ ] App-Shell: Navbar als `mat-toolbar`, zentrierter Content-Container
-      *(Navbar aktuell BEM, aber bereits theme-coloriert)*
+- [x] App-Shell: Navbar als `mat-toolbar` (Phase 14), zentrierter Content-Container vorhanden
 - [ ] Karten → `mat-card` *(Buttons → `matButton` ✓ und Icons → `mat-icon` ✓ bereits erledigt)*
 - [x] Filter/Formulare → `mat-form-field` + `mat-select`
 - [ ] Lade-Spinner (`mat-progress-spinner`), Leer-/Fehlerzustände einheitlich

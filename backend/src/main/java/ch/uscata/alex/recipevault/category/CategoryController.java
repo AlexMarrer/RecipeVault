@@ -32,7 +32,6 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Alle Kategorien auflisten")
     @ApiResponse(responseCode = "200", description = "Liste der Kategorien")
     public List<CategoryResponseDTO> list() {
@@ -40,7 +39,6 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Kategorie per ID abrufen")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Kategorie gefunden"),

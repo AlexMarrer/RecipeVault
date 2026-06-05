@@ -1,0 +1,25 @@
+<div class="rating-form">
+  <h3 class="rating-form__title">{{ existing() ? 'Deine Bewertung' : 'Rezept bewerten' }}</h3>
+
+  <app-star-rating [value]="stars()" [interactive]="true" (valueChange)="setStars($event)" />
+
+  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="rating-form__comment">
+    <mat-label>Kommentar (optional)</mat-label>
+    <textarea matInput rows="2" name="comment" [(ngModel)]="comment"></textarea>
+  </mat-form-field>
+
+  @if (message()) {
+    <p class="rating-form__hint">{{ message() }}</p>
+  }
+
+  <div class="rating-form__actions">
+    <button matButton="filled" type="button" (click)="submit()">
+      {{ existing() ? 'Aktualisieren' : 'Absenden' }}
+    </button>
+    @if (existing()) {
+      <button matButton type="button" class="rating-form__delete" (click)="deleteOwn()">
+        Bewertung löschen
+      </button>
+    }
+  </div>
+</div>

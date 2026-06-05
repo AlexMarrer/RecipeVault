@@ -80,6 +80,18 @@
         <p class="recipe-detail__status">Keine Zubereitungsschritte erfasst.</p>
       }
     </section>
+
+    <section class="recipe-detail__block">
+      <h2 class="recipe-detail__block-title">Bewertungen</h2>
+      @if (canRate()) {
+        <app-rating-form [recipeId]="recipe.id" (changed)="onRatingChanged()" />
+      } @else if (!isLoggedIn()) {
+        <p class="recipe-detail__status">Zum Bewerten bitte einloggen.</p>
+      } @else {
+        <p class="recipe-detail__status">Dein eigenes Rezept kannst du nicht bewerten.</p>
+      }
+      <app-rating-list [recipeId]="recipe.id" [refreshToken]="ratingRefresh()" />
+    </section>
   </article>
 
   @if (showDeleteDialog()) {

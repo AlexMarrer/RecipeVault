@@ -36,7 +36,6 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Rezepte auflisten",
             description = "Liefert alle Rezepte. Optional gefiltert nach Titel, Kategorie oder Schwierigkeitsgrad.")
     @ApiResponses({
@@ -73,7 +72,6 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Rezept per ID abrufen")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Rezept gefunden"),

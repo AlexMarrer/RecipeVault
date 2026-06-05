@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -40,6 +41,13 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AUTH_WHITELIST).permitAll()
+                        // Eigene Daten und Schreibzugriffe bleiben geschuetzt
+                        .requestMatchers(HttpMethod.GET, "/api/recipes/me", "/api/ratings/me").authenticated()
+                        // Rezepte, Kategorien und Bewertungen sind oeffentlich lesbar
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/recipes", "/api/recipes/**",
+                                "/api/categories", "/api/categories/**",
+                                "/api/ratings", "/api/ratings/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

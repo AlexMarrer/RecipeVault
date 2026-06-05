@@ -36,7 +36,6 @@ public class RatingController {
     private final RatingService ratingService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Bewertungen auflisten",
             description = "Liefert alle Bewertungen. Optional gefiltert nach Rezept.")
     @ApiResponses({
@@ -61,7 +60,6 @@ public class RatingController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('user', 'chef', 'admin')")
     @Operation(summary = "Bewertung per ID abrufen")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Bewertung gefunden"),

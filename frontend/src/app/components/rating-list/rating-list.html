@@ -1,0 +1,20 @@
+<div class="rating-list">
+  @if (loading()) {
+    <p class="rating-list__status">Lade Bewertungen…</p>
+  } @else {
+    @for (rating of ratings(); track rating.id) {
+      <article class="rating-list__item">
+        <header class="rating-list__head">
+          <app-star-rating [value]="rating.stars" />
+          <span class="rating-list__author">{{ isOwn(rating) ? 'Du' : 'Benutzer' }}</span>
+          <span class="rating-list__date">{{ rating.createdAt | date: 'dd.MM.yyyy' }}</span>
+        </header>
+        @if (rating.comment) {
+          <p class="rating-list__comment">{{ rating.comment }}</p>
+        }
+      </article>
+    } @empty {
+      <p class="rating-list__status">Noch keine Bewertungen – sei die/der Erste!</p>
+    }
+  }
+</div>

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
 import { RecipeListPage } from './pages/recipe-list/recipe-list';
 import { RecipeDetailPage } from './pages/recipe-detail/recipe-detail';
@@ -13,7 +12,7 @@ import { MANAGE_ROLES } from './core/roles';
 
 export const routes: Routes = [
   { path: '', redirectTo: RoutePath.recipes, pathMatch: 'full' },
-  { path: RoutePath.recipes, component: RecipeListPage, canActivate: [authGuard] },
+  { path: RoutePath.recipes, component: RecipeListPage },
   {
     path: RoutePath.recipeNew,
     component: RecipeFormPage,
@@ -26,7 +25,7 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: MANAGE_ROLES },
   },
-  { path: RoutePath.recipeDetail, component: RecipeDetailPage, canActivate: [authGuard] },
+  { path: RoutePath.recipeDetail, component: RecipeDetailPage },
   {
     path: RoutePath.myRecipes,
     component: MyRecipesPage,

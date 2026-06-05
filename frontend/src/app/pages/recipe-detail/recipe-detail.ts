@@ -8,12 +8,14 @@ import { Role } from '../../core/roles';
 import { RouteUrl } from '../../core/routes';
 import { StarRating } from '../../components/star-rating/star-rating';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
+import { RatingForm } from '../../components/rating-form/rating-form';
+import { RatingList } from '../../components/rating-list/rating-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-recipe-detail',
-  imports: [RouterLink, StarRating, ConfirmDialog, MatButtonModule, MatIconModule],
+  imports: [RouterLink, StarRating, ConfirmDialog, RatingForm, RatingList, MatButtonModule, MatIconModule],
   templateUrl: './recipe-detail.html',
   styleUrl: './recipe-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,6 +31,7 @@ export class RecipeDetailPage implements OnInit {
   protected readonly loading = signal(true);
   protected readonly error = signal<string | null>(null);
   protected readonly showDeleteDialog = signal(false);
+  protected readonly ratingRefresh = signal(0);
 
   protected readonly sortedSections = computed<RecipeSection[]>(() =>
     [...(this.recipe()?.sections ?? [])]
@@ -55,7 +58,19 @@ export class RecipeDetailPage implements OnInit {
     return this.auth.hasRole(Role.chef) && current.authorId === this.auth.getUserId();
   });
 
+  protected readonly canRate = computed(() => {
+    const current = this.recipe();
+    if (!current || !this.auth.isLoggedIn()) {
+      return false;
+    }
+    return current.authorId !== this.auth.getUserId();
+  });
+
   protected readonly editUrl = computed(() => RouteUrl.recipeEdit(this.id()));
+
+  protected isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
 
   ngOnInit(): void {
     const numericId = Number(this.id());
@@ -74,6 +89,14 @@ export class RecipeDetailPage implements OnInit {
         this.loading.set(false);
       },
     });
+  }
+
+  protected onRatingChanged(): void {
+    this.ratingRefresh.update((value) => value + 1);
+    const numericId = Number(this.id());
+    if (Number.isInteger(numericId) && numericId > 0) {
+      this.recipeService.getById(numericId).subscribe({ next: (recipe) => this.recipe.set(recipe) });
+    }
   }
 
   protected confirmDelete(): void {

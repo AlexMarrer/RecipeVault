@@ -1,12 +1,49 @@
-<nav class="navbar">
+<mat-toolbar class="navbar">
   <a [routerLink]="recipesUrl" class="navbar__brand">RecipeVault</a>
 
-  <div class="navbar__actions">
+  <nav class="navbar__links">
+    <a
+      matButton
+      [routerLink]="recipesUrl"
+      routerLinkActive="navbar__link--active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Rezepte
+    </a>
     @if (isLoggedIn()) {
-      <span class="navbar__user">{{ username() }}</span>
-      <button type="button" class="navbar__button" (click)="logout()">Logout</button>
-    } @else {
-      <button type="button" class="navbar__button" (click)="login()">Login</button>
+      <a
+        *appHasRole="manageRoles"
+        matButton
+        [routerLink]="myRecipesUrl"
+        routerLinkActive="navbar__link--active"
+      >
+        Meine Rezepte
+      </a>
+      <a
+        *appHasRole="manageRoles"
+        matButton
+        [routerLink]="categoriesUrl"
+        routerLinkActive="navbar__link--active"
+      >
+        Kategorien
+      </a>
+      <a
+        *appHasRole="manageRoles"
+        matButton
+        [routerLink]="ingredientsUrl"
+        routerLinkActive="navbar__link--active"
+      >
+        Zutaten
+      </a>
     }
-  </div>
-</nav>
+  </nav>
+
+  <span class="navbar__spacer"></span>
+
+  @if (isLoggedIn()) {
+    <span class="navbar__user">{{ username() }}</span>
+    <button matButton type="button" (click)="logout()">Logout</button>
+  } @else {
+    <button matButton="filled" type="button" (click)="login()">Login</button>
+  }
+</mat-toolbar>
