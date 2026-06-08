@@ -1,3 +1,5 @@
+@use 'breakpoints' as *;
+
 .recipe-detail {
   display: flex;
   flex-direction: column;
@@ -135,4 +137,18 @@
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
+}
+
+@include handset {
+  .recipe-detail__header {
+    flex-direction: column;
+  }
+
+  .recipe-detail__actions {
+    align-self: stretch;
+  }
+
+  .recipe-detail__image {
+    max-height: 14rem;
+  }
 }

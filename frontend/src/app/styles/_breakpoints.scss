@@ -1,0 +1,14 @@
+$bp-handset: 37.5rem;
+$bp-tablet: 56.25rem;
+
+@mixin handset {
+  @media (max-width: $bp-handset) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $bp-tablet) {
+    @content;
+  }
+}

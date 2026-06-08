@@ -1,3 +1,5 @@
+@use 'breakpoints' as *;
+
 .admin {
   display: flex;
   flex-direction: column;
@@ -68,4 +70,10 @@
 .admin__delete {
   --mat-sys-primary: var(--mat-sys-error);
   color: var(--mat-sys-error);
+}
+
+@include handset {
+  .admin__field {
+    flex: 1 1 100%;
+  }
 }
