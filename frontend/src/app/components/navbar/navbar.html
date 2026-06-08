@@ -6,7 +6,7 @@
       matButton
       [routerLink]="recipesUrl"
       routerLinkActive="navbar__link--active"
-      [routerLinkActiveOptions]="{ exact: true }"
+      [routerLinkActiveOptions]="recipesActiveMatch"
     >
       Rezepte
     </a>
@@ -40,10 +40,59 @@
 
   <span class="navbar__spacer"></span>
 
-  @if (isLoggedIn()) {
-    <span class="navbar__user">{{ username() }}</span>
-    <button matButton type="button" (click)="logout()">Logout</button>
-  } @else {
-    <button matButton="filled" type="button" (click)="login()">Login</button>
-  }
+  <div class="navbar__auth">
+    @if (isLoggedIn()) {
+      <span class="navbar__user">{{ username() }}</span>
+      <button matButton type="button" (click)="logout()">Logout</button>
+    } @else {
+      <button matButton="filled" type="button" (click)="login()">Login</button>
+    }
+  </div>
+
+  <button
+    class="navbar__menu-button"
+    matIconButton
+    type="button"
+    [matMenuTriggerFor]="mobileMenu"
+    aria-label="Navigation öffnen"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #mobileMenu="matMenu">
+    <a
+      mat-menu-item
+      [routerLink]="recipesUrl"
+      routerLinkActive="navbar__menu-item--active"
+      [routerLinkActiveOptions]="recipesActiveMatch"
+    >
+      Rezepte
+    </a>
+    @if (isLoggedIn()) {
+      <a
+        *appHasRole="manageRoles"
+        mat-menu-item
+        [routerLink]="myRecipesUrl"
+        routerLinkActive="navbar__menu-item--active"
+      >
+        Meine Rezepte
+      </a>
+      <a
+        *appHasRole="manageRoles"
+        mat-menu-item
+        [routerLink]="categoriesUrl"
+        routerLinkActive="navbar__menu-item--active"
+      >
+        Kategorien
+      </a>
+      <a
+        *appHasRole="manageRoles"
+        mat-menu-item
+        [routerLink]="ingredientsUrl"
+        routerLinkActive="navbar__menu-item--active"
+      >
+        Zutaten
+      </a>
+    }
+  </mat-menu>
 </mat-toolbar>

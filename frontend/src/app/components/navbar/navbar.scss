@@ -1,3 +1,5 @@
+@use 'breakpoints' as *;
+
 .navbar {
   display: flex;
   align-items: center;
@@ -28,7 +30,32 @@
   flex: 1 1 auto;
 }
 
+.navbar__auth {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .navbar__user {
   font: var(--mat-sys-body-small);
   color: var(--mat-sys-on-surface-variant);
+}
+
+.navbar__menu-button {
+  display: none;
+}
+
+.navbar__menu-item--active {
+  background: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+
+@include tablet {
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__menu-button {
+    display: inline-flex;
+  }
 }
