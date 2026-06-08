@@ -54,6 +54,15 @@ ohnehin aus dem Array-Index abgeleitet.
 | [18](phase-18-editor-inline-stammdaten/) | Zutaten & Kategorien inline im Rezept-Formular anlegen | ✅ erledigt (Build + Lint grün) |
 | [19](phase-19-editor-default-einheit/) | Standard-Einheit der Zutat automatisch übernehmen | ✅ erledigt (Build + Lint grün) |
 
+## Status – Teil D: Responsiveness
+
+Neu beauftragt (2026-06-08). **Frontend-only.** Aktuell existiert **keine einzige `@media`-Query**;
+das Layout ist nur für Desktop gebaut. Kernthema ist die Navbar (klappt auf dem Handy nicht zu).
+
+| Phase | Thema | Status |
+|------|-------|--------|
+| [20](phase-20-responsiveness/) | Responsiveness (Mobile/Handy): Navbar-Menü, Breakpoints, Komponenten-Feinschliff | ✅ erledigt (Build + Lint grün, 375/1280 px geprüft) |
+
 **Empfohlene Reihenfolge ab hier:** 14b (Styling) → **17 → 18 → 19** (Features) → **15** (Tests,
 decken die neuen Editor-Features mit ab) → **16** (Doku/Abgabe). Die Feature-Phasen sind bewusst
 höher nummeriert, laufen aber **vor** Tests/Doku, damit diese den finalen Stand abbilden.
