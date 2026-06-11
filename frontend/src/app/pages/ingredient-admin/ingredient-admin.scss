@@ -25,7 +25,7 @@
       flex: 0 1 8rem;
     }
 
-    @include handset {
+    @include mobile {
       flex: 1 1 100%;
     }
   }

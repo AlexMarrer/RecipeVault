@@ -11,7 +11,7 @@
     justify-content: space-between;
     gap: 1rem;
 
-    @include handset {
+    @include mobile {
       flex-direction: column;
       align-items: flex-start;
     }

@@ -7,7 +7,7 @@
     margin: 0 auto;
     padding: 1.5rem;
 
-    @include handset {
+    @include mobile {
       padding: 1rem;
     }
   }

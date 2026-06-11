@@ -127,7 +127,7 @@
     justify-content: flex-end;
     gap: 0.75rem;
 
-    @include handset {
+    @include mobile {
       flex-direction: column-reverse;
       align-items: stretch;
     }

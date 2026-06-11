@@ -20,7 +20,7 @@
     justify-content: space-between;
     gap: 1rem;
 
-    @include handset {
+    @include mobile {
       flex-direction: column;
     }
   }
@@ -52,7 +52,7 @@
     gap: 0.5rem;
     flex-shrink: 0;
 
-    @include handset {
+    @include mobile {
       align-self: stretch;
     }
   }
@@ -67,7 +67,7 @@
     object-fit: cover;
     border-radius: 0.75rem;
 
-    @include handset {
+    @include mobile {
       max-height: 14rem;
     }
   }

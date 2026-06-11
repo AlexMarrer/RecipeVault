@@ -8,7 +8,7 @@
     gap: 1rem;
     margin-bottom: 1rem;
 
-    @include handset {
+    @include mobile {
       flex-direction: column;
       align-items: flex-start;
     }
@@ -35,7 +35,7 @@
     padding: 0;
     list-style: none;
 
-    @include handset {
+    @include mobile {
       grid-template-columns: 1fr;
     }
   }
