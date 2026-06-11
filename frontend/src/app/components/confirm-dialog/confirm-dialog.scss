@@ -7,35 +7,35 @@
   padding: 1rem;
   background: color-mix(in srgb, var(--mat-sys-on-surface) 40%, transparent);
   z-index: 100;
-}
 
-.confirm-dialog__panel {
-  width: 100%;
-  max-width: 26rem;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background: var(--mat-sys-surface-container-high);
-  color: var(--mat-sys-on-surface);
-  box-shadow: var(--mat-sys-level5);
-}
+  &__panel {
+    width: 100%;
+    max-width: 26rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background: var(--mat-sys-surface-container-high);
+    color: var(--mat-sys-on-surface);
+    box-shadow: var(--mat-sys-level5);
+  }
 
-.confirm-dialog__title {
-  margin: 0 0 0.5rem;
-  font: var(--mat-sys-title-large);
-}
+  &__title {
+    margin: 0 0 0.5rem;
+    font: var(--mat-sys-title-large);
+  }
 
-.confirm-dialog__message {
-  margin: 0 0 1.5rem;
-  color: var(--mat-sys-on-surface-variant);
-}
+  &__message {
+    margin: 0 0 1.5rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
 
-.confirm-dialog__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
-}
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
 
-.confirm-dialog__confirm {
-  --mat-sys-primary: var(--mat-sys-error);
-  --mat-sys-on-primary: var(--mat-sys-on-error);
+  &__confirm {
+    --mat-sys-primary: var(--mat-sys-error);
+    --mat-sys-on-primary: var(--mat-sys-on-error);
+  }
 }

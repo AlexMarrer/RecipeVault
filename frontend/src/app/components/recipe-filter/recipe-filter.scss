@@ -6,27 +6,24 @@
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
-}
 
-.recipe-filter__field {
-  flex: 0 1 12rem;
-}
+  &__field {
+    flex: 0 1 12rem;
 
-.recipe-filter__field--title {
-  flex: 1 1 14rem;
-}
+    &--title {
+      flex: 1 1 14rem;
+    }
 
-.recipe-filter__button {
-  flex-shrink: 0;
-}
-
-@include handset {
-  .recipe-filter__field,
-  .recipe-filter__field--title {
-    flex: 1 1 100%;
+    @include handset {
+      flex: 1 1 100%;
+    }
   }
 
-  .recipe-filter__button {
-    width: 100%;
+  &__button {
+    flex-shrink: 0;
+
+    @include handset {
+      width: 100%;
+    }
   }
 }

@@ -1,14 +1,14 @@
 @use 'breakpoints' as *;
 
-.app__content {
-  display: block;
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
+.app {
+  &__content {
+    display: block;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 1.5rem;
 
-@include handset {
-  .app__content {
-    padding: 1rem;
+    @include handset {
+      padding: 1rem;
+    }
   }
 }
