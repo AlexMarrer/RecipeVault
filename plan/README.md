@@ -39,8 +39,8 @@ Mindestanforderungen ab, siehe Matrix unten).
 | [13](phase-13-ratings/) | Bewertungen im Frontend (Rating-CRUD) | ✅ erledigt (Build + Lint grün) |
 | [14](phase-14-navigation-roles/) | Navigation, Rollen-Sichtbarkeit, Routing-Feinschliff | ✅ erledigt (Build + Lint grün) |
 | [14b](phase-14b-styling/) | **Styling & Design-System** (Material-Look + BEM-Tokens, Nachhol 9/10) | 🟡 Nachhol 9/10 erledigt, globaler Schliff offen |
-| [15](phase-15-unit-tests/) | Unit Tests (Vitest: Service + Komponente) | ⬜ offen |
-| [16](phase-16-doku-abgabe/) | Dokumentation & GitHub-Abgabe | ⬜ offen |
+| [15](phase-15-unit-tests/) | Unit Tests (Vitest: Service + Komponente) | ✅ erledigt (`npm test` grün: 22 Tests; alle Service-Methoden + recipe-form abgedeckt) |
+| [16](phase-16-doku-abgabe/) | Dokumentation & GitHub-Abgabe | 🔀 aufgeteilt → Phasen 21–24 (Teil E) |
 
 ## Status – Teil C: Zusatz-Features Rezept-Editor
 
@@ -62,6 +62,22 @@ das Layout ist nur für Desktop gebaut. Kernthema ist die Navbar (klappt auf dem
 | Phase | Thema | Status |
 |------|-------|--------|
 | [20](phase-20-responsiveness/) | Responsiveness (Mobile/Handy): Navbar-Menü, Breakpoints, Komponenten-Feinschliff | ✅ erledigt (Build + Lint grün, 375/1280 px geprüft) |
+
+## Status – Teil E: Abgabe
+
+Neu strukturiert (2026-06-08). Der Code ist fertig (16 Komponenten/Pages, CRUD, Guards, Tests
+grün). Hier geht es nur noch um **Nachweis, Dokumentation und Paketierung** der Abgabe. Phase 16
+war als eine grobe Sammelphase zu breit und wird durch diese vier konkreten Phasen ersetzt.
+**Blocker:** Phase 22 (Screenshots) braucht eine laufende App inkl. Keycloak (Phase 0).
+
+| Phase | Thema | Status |
+|------|-------|--------|
+| [21](phase-21-anforderungs-abnahme/) | Anforderungs-Abnahme: Nachweis-Matrix je Mindestanforderung | ⬜ offen |
+| [22](phase-22-screenshots-wireframes/) | Screenshots (pro Rolle) + Wireframes der wichtigsten Ansichten | ⬜ offen (braucht Phase 0) |
+| [23](phase-23-projektdoku-pdf/) | Projektdokumentation als PDF (auf M295-Doku aufbauend) | ⬜ offen |
+| [24](phase-24-git-zip-abgabe/) | README-Update, Git-Push, ZIP `uscata.alex_m294.zip` inkl. `.git` | ⬜ offen |
+
+**Empfohlene Reihenfolge zur Abgabe:** 21 → (Phase 0 Keycloak/Phase 7 Login) → 22 → 23 → 24.
 
 **Empfohlene Reihenfolge ab hier:** 14b (Styling) → **17 → 18 → 19** (Features) → **15** (Tests,
 decken die neuen Editor-Features mit ab) → **16** (Doku/Abgabe). Die Feature-Phasen sind bewusst

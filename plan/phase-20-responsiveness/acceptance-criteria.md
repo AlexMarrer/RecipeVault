@@ -1,7 +1,7 @@
 # Acceptance Criteria – Phase 20 (Responsiveness)
 
 - Auf einem Handy (~360 px Breite) gibt es auf **keiner** Seite horizontales Scrollen.
-- Die **Navbar** klappt unter dem Handset-Breakpoint zu einem Menü (Hamburger) zusammen;
+- Die **Navbar** klappt unter dem mobile-Breakpoint zu einem Menü (Hamburger) zusammen;
   alle Links inkl. rollenabhängiger Einträge und Login/Logout sind darüber erreichbar,
   der Aktiv-Zustand bleibt sichtbar.
 - Inhalte (Detail-Header, Formular-Aktionen, Filter, Admin-Listen) **stapeln** auf schmaler

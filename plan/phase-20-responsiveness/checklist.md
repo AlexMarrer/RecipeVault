@@ -1,10 +1,10 @@
 # Checkliste – Phase 20 (Responsiveness)
 
-- [x] `_breakpoints.scss` angelegt: `$bp-handset` (+`$bp-tablet`) + `@mixin handset`/`tablet`
-      *(via `angular.json` → `stylePreprocessorOptions.includePaths` als `@use 'breakpoints'` nutzbar)*
+- [x] `_breakpoints.scss` angelegt: `$bp-mobile` (+`$bp-tablet`) + `@mixin mobile`/`tablet`
+      _(via `angular.json` → `stylePreprocessorOptions.includePaths` als `@use 'breakpoints'` nutzbar)_
 - [x] **Navbar**: unter `$bp-tablet` (900px) Hamburger + `mat-menu` (Links + Login/Logout),
       Rollen-Sichtbarkeit (`*appHasRole`) und Aktiv-Zustand erhalten
-      *(Tablet-Schwelle statt Handset, weil eingeloggt 4 Links + Username + Logout sonst überlaufen)*
+      _(Tablet-Schwelle statt mobile, weil eingeloggt 4 Links + Username + Logout sonst überlaufen)_
 - [x] `app.scss`: `.app__content`-Padding auf Handy reduziert, kein horizontales Scrollen
 - [x] **recipe-list**: Grid auf Handy einspaltig, Header bricht sauber um
 - [x] **recipe-detail**: `__header` stapelt (Titel/Aktionen), Bildhöhe auf Handy reduziert

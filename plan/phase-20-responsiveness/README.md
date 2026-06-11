@@ -23,15 +23,15 @@ Navbar klappt zu einem Menü zusammen, Inhalte stapeln statt zu quetschen, Touch
 ### 1. Breakpoint-Fundament (zentral, keine Magic Numbers)
 
 - Neues Sass-Partial `frontend/src/app/styles/_breakpoints.scss` mit Tokens + Mixin:
-  - `$bp-handset: 37.5rem` (≈ 600 px, Material „handset"), optional `$bp-tablet: 56.25rem` (≈ 900 px).
-  - `@mixin handset { @media (max-width: $bp-handset) { @content; } }` (analog `tablet`).
+  - `$bp-mobile: 37.5rem` (≈ 600 px, Material „mobile"), optional `$bp-tablet: 56.25rem` (≈ 900 px).
+  - `@mixin mobile { @media (max-width: $bp-mobile) { @content; } }` (analog `tablet`).
 - Jede Komponente, die einen Breakpoint braucht, bindet das Partial per `@use` ein
   (Angular kompiliert Component-SCSS isoliert → Mixin aus `styles.scss` ist dort nicht sichtbar).
 
 ### 2. Navbar (Kern-Thema) – `components/navbar`
 
 - Desktop bleibt wie bisher (Links horizontal in der `mat-toolbar`).
-- Unter `$bp-handset`: Links + Login/Logout in ein **Menü** auslagern.
+- Unter `$bp-mobile`: Links + Login/Logout in ein **Menü** auslagern.
   - Empfohlen: `mat-icon-button` mit `menu`-Icon als Trigger → `mat-menu` (Dropdown) mit denselben
     Routerlinks (`*appHasRole`-Sichtbarkeit bleibt erhalten). Alternative: `mat-sidenav`-Drawer.
   - Marke (`navbar__brand`) bleibt links sichtbar, Hamburger rechts.
