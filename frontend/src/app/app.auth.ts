@@ -4,10 +4,9 @@ import { environment } from '../environments/environment';
 export const authConfig: AuthConfig = {
   issuer: environment.issuer,
   clientId: environment.clientId,
-  redirectUri: window.location.origin,
-  postLogoutRedirectUri: window.location.origin,
+  redirectUri: globalThis.location.origin,
+  postLogoutRedirectUri: globalThis.location.origin,
   responseType: 'code',
   scope: 'openid profile email',
-  // Keycloak läuft im Dev auf http://localhost:8080 (kein HTTPS)
   requireHttps: false,
 };
